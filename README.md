@@ -10,10 +10,13 @@ Requirements:
 * sqlite
 
 
+
 1. Clone this repo
 2. Navigate into the directory from terminal and run bundle install
-3. Run rake db:migrate and rake db:seed
-4. Run ruby bin/run.rb
+3. Get Nutritionix app id and and api key
+4. Run rake db:migrate and rake db:seed
+5. Run ruby bin/run.rb
+
 
 ### Usecases
 
@@ -28,6 +31,8 @@ Requirements:
 - User can see nutritional data for the recipe.
 
 - User can choose for how many portions they want the recipe to be for.
+
+- User can update the name of saved recipes
 
 ## Contributing
 

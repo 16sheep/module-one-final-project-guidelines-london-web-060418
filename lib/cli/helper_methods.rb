@@ -59,7 +59,7 @@ end
 
 def get_portions(ingredients, num_of_portions)
   ingredients_quantities = ingredients.map do |ingredient|
-    quantity = (ingredient.quantity.to_f / 3 * num_of_portions.to_i).to_f.round(2)
+    quantity = (ingredient.quantity.to_f / 2 * num_of_portions.to_i).to_f.round(2)
     unit = ingredient.serving_unit
     "#{quantity} #{unit}"
   end
@@ -134,9 +134,8 @@ def recipe_book(user)
 
       case input2
       when "1", "edit" then
-        system("clear")
-        puts " Current recipe name: #{recipe.name}"
-        print " New recipe name: "
+        puts "\n Current recipe name:".light_red + " #{recipe.name}"
+        print " New recipe name: ".light_green
         recipe.name = gets.strip
         recipe.save
       when "2", "remove" then
@@ -232,9 +231,9 @@ def run
         password = gets.strip
         User.create(username: username, password: password)
         system("clear")
-        puts "\n      - - - - - - - - - - - - - - - -"
-        puts "      New account succesfully created"
-        puts "      - - - - - - - - - - - - - - - -\n"
+        puts "\n      - - - - - - - - - - - - - - - -".green
+        puts "      New account succesfully created".green
+        puts "      - - - - - - - - - - - - - - - -\n".green
       end
 
     when "3", "exit"
