@@ -14,8 +14,9 @@ Requirements:
 1. Clone this repo
 2. Navigate into the directory from terminal and run bundle install
 3. Get Nutritionix app id and and api key
-4. Run rake db:migrate and rake db:seed
-5. Run ruby bin/run.rb
+4. Replace <YOUR_APP_ID> with you app id and <YOUR_API_KEY> with api key
+5. Run rake db:migrate and rake db:seed
+6. Run ruby bin/run.rb
 
 
 ### Usecases

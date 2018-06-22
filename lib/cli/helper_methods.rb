@@ -255,7 +255,7 @@ def run
       case input
 
       when "1", "generate" then
-
+        puts " - / - \\ - Fetching Data - / - \\ -".magenta
         generate_recipe(user)
 
       when "2", "browse" then recipe_book(user)
