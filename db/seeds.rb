@@ -4,7 +4,7 @@ TemplateRecipe.create(
   avg_cooking_time: 60,
   ingredient_requirement: "{
     \"grains\":0,
-    \"proteins\":0,
+    \"proteins\":1,
     \"veg\":3,
     \"base_ingredients\":[
       \"Oil\",
@@ -46,27 +46,27 @@ TemplateRecipe.create(
   }"
 )
 
-# TemplateRecipe.create(
-#   meal: "Burrito",
-#   avg_cooking_time: 30,
-#   ingredient_requirement: "{
-#     \"grains\":1,
-#     \"proteins\":1,
-#     \"veg\":3,
-#     \"base_ingredients\":[
-#       \"Oil\",
-#       \"Tortilla\"
-#     ]
-#   }",
-#   instructions: "{
-#     \"1\":\"Put the grains in a pan, add double the amount of water and put to boil.\",
-#     \"2\":\"Clean and/or peel the vegetables, slice them small and fry them in a pan with oil, salt and pepper.\",
-#     \"3\":\"If the water has boiled away and grain is not soft add half a cup of water.\",
-#     \"4\":\"Fry the protein in salt and pepper and oil for 10 minutes.\",
-#     \"5\":\"When everything is cooked add a scoop of everything onto the tortillas and wrap them up.\",
-#     \"optional\":\"Add raw tomato, salad or veganaise.\"
-#   }"
-# )
+TemplateRecipe.create(
+  meal: "Burrito",
+  avg_cooking_time: 30,
+  ingredient_requirement: "{
+    \"grains\":1,
+    \"proteins\":1,
+    \"veg\":3,
+    \"base_ingredients\":[
+      \"Oil\",
+      \"Tortilla\"
+    ]
+  }",
+  instructions: "{
+    \"1\":\"Put the grain in a pan, add double the amount of water and put to boil.\",
+    \"2\":\"Clean and/or peel the vegetables, slice them small and fry them in a pan with oil, salt and pepper.\",
+    \"3\":\"If the water has boiled away and grain is not soft add half a cup of water.\",
+    \"4\":\"Fry the protein in salt and pepper and oil for 10 minutes.\",
+    \"5\":\"When everything is cooked add a scoop of everything onto the tortillas and wrap them up.\",
+    \"optional\":\"Add raw tomato, salad or veganaise.\"
+  }"
+)
 
 
 TemplateRecipe.create(
@@ -81,10 +81,11 @@ TemplateRecipe.create(
     ]
   }",
   instructions: "{
-    \"1\":\"Put the grain in a pan, add double the amount of water and put to boil\",
+    \"1\":\"Put the grain in a pan, add double the amount of water and put to boil.\",
     \"2\":\"Clean and/or peel the vegetables and fry them in oil with protein.\",
     \"3\":\"If the water has boiled away and grain is not soft add half a cup of water.\",
-    \"5\":\"When grain is cooked throw grain in with the vegetables and protein\",
+    \"4\":\"Fry the protein in salt and pepper and oil for 10 minutes\",
+    \"5\":\"When grain is cooked throw grain in with the vegetables and protein.\",
     \"6\":\"Season with salt and pepper.\",
     \"optional\":\"Throw in some sriracha or vegan soy sauce for taste.\"
   }"

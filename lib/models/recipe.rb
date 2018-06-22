@@ -19,7 +19,7 @@ class Recipe < ActiveRecord::Base
     get_nutrition_data
     self.name = self.generate_name
     update_ingredient_quantity
-    self.instructions = instructions
+    instructions
     self.save
   end
 
