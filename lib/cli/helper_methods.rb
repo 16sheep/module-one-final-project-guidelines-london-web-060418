@@ -1,9 +1,9 @@
 require 'pry'
 #LOGIN MENU
 def start_menu
-  puts "\n                1. Login"
-  puts "               2. Sign up"
-  puts "                3. Exit\n"
+  puts "\n                1. Login".yellow
+  puts "               2. Sign up".yellow
+  puts "                3. Exit\n".yellow
 end
 
 #MAIN MENU
@@ -14,42 +14,42 @@ def display_image
   puts "                      /e e\\ "
   puts "                     ( =Y= )"
   puts "                     /`-!-'\\ "
-  puts "        ___\\ \\      /       \\"
-  puts " \\   /    ```  --```~~\"--.,__\\"
-  puts " `-._\\ /                       `~~\"--.,_"
-  puts " ----->|                                `~~\"--.,_"
-  puts " _.-'/ \\                                         ~~\"--.,_"
-  puts "     \\_________________________,,,,....----\"\"\"\"~~~~````"
+  puts "        ___\\ \\".light_red + "      /       \\"
+  puts " \\".light_green + "   /    ```  --```~~\"--.,__".light_red + "\\"
+  puts " `-._".light_green + "\\ /                       `~~\"--.,_".light_red
+  puts " ----->".light_green + "|                                `~~\"--.,_".light_red
+  puts " _.-'".light_green + "/ \\                                         ~~\"--.,_".light_red
+  puts "     \\_________________________,,,,....----\"\"\"\"~~~~````".light_red
 end
 
 def main_menu
-  puts "\n  How can I help you:"
-  puts "\n             1. Generate New Recipe"
-  puts "             2. Browse Recipe Book"
-  puts "                   3. Help"
-  puts "                   4. Exit"
+  puts "\n  How can I help you:".cyan
+  puts "\n             1. Generate New Recipe".yellow
+  puts "             2. Browse Recipe Book".yellow
+  puts "                   3. Help".yellow
+  puts "                   4. Exit".yellow
 end
 
 #1 - RECIPE GENERATOR
 def generate_recipe(user)
   recipe = Recipe.create
   display_recipe(recipe)
-  puts "\nWould you like to add this recipe to your Recipe Book? (Y/N)"
+  puts "\nWould you like to add this recipe to your Recipe Book? (Y/N)".cyan
   loop do
     input = gets.strip.downcase
 
     if input == "y" || input == "yes"
       PersonalRecipe.create(template_recipe_id: recipe.template_recipe_id, user_id: user.id)
       system("clear")
-      puts "   - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
-      puts "      The recipe has been added to your Recipe Book!\n"
-      puts "   - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
+      puts "   - - - - - - - - - - - - - - - - - - - - - - - - - - - -".green
+      puts "      The recipe has been added to your Recipe Book!".green
+      puts "   - - - - - - - - - - - - - - - - - - - - - - - - - - - -".green
       break
     elsif input == "n" || input == "no"
       system("clear")
       break
     else
-      puts "I'm sorry, but I need a 'Yes'('Y') or a 'No'('N')"
+      puts "I'm sorry, but I need a 'Yes'('Y') or a 'No'('N')".red
     end
   end
 end
@@ -68,13 +68,13 @@ end
 
 def prompt_for_portions
   loop do
-    puts "How many people are you cooking for?"
+    puts "How many people are you cooking for?".light_black
     input = gets.strip
     if ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"].include?(input)
       system("clear")
       return input
     else
-      puts " Invalid command. Please try again."
+      puts " Invalid command. Please try again.".magenta
     end
   end
 end
@@ -86,19 +86,19 @@ def display_recipe(recipe)
   num_of_portions = prompt_for_portions
   ingredient_quantity = get_portions(ingredients, num_of_portions)
   nutrition = NutritionFact.find_by(recipe_id: recipe.id)
-  puts "\n        - - - #{recipe.name} - - -"
-  puts "\n  INGREDIENTS:\n"
+  puts "\n        - - -".red + " #{recipe.name}".green + " - - -".red
+  puts "\n  INGREDIENTS:\n".yellow
   ingredients.each do |ing|
     i = ingredients.index(ing)
     puts " o #{ing.name} #{ingredient_quantity[i]}"
   end
-  puts "\n  INSTRUCTIONS:\n"
+  puts "\n  INSTRUCTIONS:\n".yellow
   instructions.each do |step, instruction|
     puts " #{step} - #{instruction}"
   end
-  puts "\n  NUTRITIONAL FACTS:"
-  print " Carbohydates: #{nutrition[:carbs]}g -"
-  print " Protein: #{nutrition[:protein]}g -"
+  puts "\n  NUTRITIONAL FACTS:".yellow
+  print " Carbohydates: #{nutrition[:carbs]}g //"
+  print " Protein: #{nutrition[:protein]}g //"
   puts " Fats: #{nutrition[:fat]}g"
 end
 
@@ -109,11 +109,11 @@ def recipe_book(user)
     p_r.user == user
   end
   loop do
-    puts "\n~ ~ ~ ~ ~ ~ ~ ~ ~ RECIPE BOOK ~ ~ ~ ~ ~ ~ ~ ~ ~\n\n"
+    puts "\n~ ~ ~ ~ ~ ~ ~ ~ ~".red + " RECIPE BOOK".green + " ~ ~ ~ ~ ~ ~ ~ ~ ~\n\n".red
     book.each_with_index do |recipe, index|
-      puts " #{index + 1}. #{recipe.name}"
+      puts " #{index + 1}. #{recipe.name}".yellow
     end
-    puts " 0. Close Recipe Book"
+    puts " 0. Close Recipe Book".yellow
     puts "\n Enter the NUMBER for the recipe you'd like to see:".light_black
     input = gets.strip.to_i
     recipe = book[input - 1]
@@ -124,11 +124,11 @@ def recipe_book(user)
 
     elsif input <= book.length
       display_recipe(recipe)
-      puts "\n What would you like to do with this recipe?"
-      puts " 1. Edit recipe's name"
-      puts " 2. Remove recipe from Recipe Book"
-      puts " 3. Go back to Recipe Book"
-      puts " 4. Return to Main Menu"
+      puts "\n What would you like to do with this recipe?".cyan
+      puts "  1. Edit recipe's name".yellow
+      puts "  2. Remove recipe from Recipe Book".yellow
+      puts "  3. Go back to Recipe Book".yellow
+      puts "  4. Return to Main Menu".yellow
       puts "\n Enter the number or the first word of a command:".light_black
       input2 = gets.strip.downcase
 
@@ -145,9 +145,9 @@ def recipe_book(user)
         book = PersonalRecipe.all.select do |p_r|
           p_r.user == user
         end
-        puts "\n   - - - - - - - - - - - - - - - -"
-        puts "    The recipe has been deleted"
-        puts "   - - - - - - - - - - - - - - - -\n"
+        puts "\n   - - - - - - - - - - - - - - - -".green
+        puts "    The recipe has been deleted".green
+        puts "   - - - - - - - - - - - - - - - -\n".green
       when "3", "go" then
         recipe_book(user)
         break
@@ -155,7 +155,7 @@ def recipe_book(user)
         system("clear")
         break
       else
-        puts "Invalid command. Please try again."
+        puts "Invalid command. Please try again.".magenta
       end
     else
       puts " Please enter a number between 0 and #{book.length}."
@@ -168,20 +168,20 @@ end
 #3 - HELP INFORMATION
 def help_info
   system("clear")
-  puts "\n Help - Shows information about commands"
-  puts "\n 1 . Generate New Recipe"
-  puts "       Creates a new recipe using random ingredients."
-  puts "       This recipe can then be saved to your Recipe Book."
-  puts "\n 2 . Browse Recipe Book"
-  puts "       Browse your collection of saved recipes."
-  puts "\n 4 . Exit"
-  puts "       Exit the program, discarding any unsaved recipes."
+  puts "\n Help - Shows information about commands".green
+  puts "\n 1 . Generate New Recipe".yellow
+  puts "       Creates a new recipe using random ingredients.".yellow
+  puts "       This recipe can then be saved to your Recipe Book.".yellow
+  puts "\n 2 . Browse Recipe Book".yellow
+  puts "       Browse your collection of saved recipes.".yellow
+  puts "\n 4 . Exit".yellow
+  puts "       Exit the program, discarding any unsaved recipes.".light_yellow
 end
 
 #RUN PROGRAM
 def run
   system("clear")
-  puts "\n\n/\\/\\/\\/\\/\\ - VEGAN GENERATOR - /\\/\\/\\/\\/\\".green
+  puts "\n\n/\\/\\/\\/\\/\\".light_red + " - VEGAN GENERATOR - ".green + "/\\/\\/\\/\\/\\".light_red
   user = nil
   loop do
     start_menu
@@ -191,7 +191,7 @@ def run
     case input
 
     when "1", "login"
-      puts "\n      L O G I N\n\n"
+      puts "\n      L O G I N\n\n".green
       print " Username: "
       username = gets.strip
 
@@ -204,20 +204,20 @@ def run
           break
         else
           system("clear")
-          puts "   - - - - - - - - - - - - - - - - - -"
-          puts "   - X - X - Wrong password - X - X -"
-          puts "   - - - - - - - - - - - - - - - - - -"
+          puts "   - - - - - - - - - - - - - - - - - -".red
+          puts "   - X - X - Wrong password - X - X -".red
+          puts "   - - - - - - - - - - - - - - - - - -".red
         end
 
       else
         system("clear")
-        puts "   - - - - - - - - - - - - - - - - - - - - - - - -"
-        puts "   - X - X - That account doesn't exist - X - X -"
-        puts "   - - - - - - - - - - - - - - - - - - - - - - - -"
+        puts "- - - - - - - - - - - - - - - - - - - - - - - -".red
+        puts "- X - X - That account doesn't exist - X - X -".red
+        puts "- - - - - - - - - - - - - - - - - - - - - - - -".red
       end
 
     when "2", "sign up"
-      puts "\n      S I G N   U P\n\n"
+      puts "\n      S I G N   U P\n\n".green
       print " Username: "
       username = gets.strip
 
@@ -232,22 +232,22 @@ def run
         password = gets.strip
         User.create(username: username, password: password)
         system("clear")
-        puts "\n   - - - - - - - - - - - - - - - -"
-        puts "   New account succesfully created"
-        puts "   - - - - - - - - - - - - - - - -\n"
+        puts "\n      - - - - - - - - - - - - - - - -"
+        puts "      New account succesfully created"
+        puts "      - - - - - - - - - - - - - - - -\n"
       end
 
     when "3", "exit"
       puts "      Goodbye!\n"
       break
     else
-      puts "Invalid command. Please try again."
+      puts "Invalid command. Please try again.".magenta
     end
   end
 
   if user != nil
     system("clear")
-    puts "\nWelcome User! I'll be your Recipe Rabbit for today!\n\n"
+    puts "\n Welcome User! I'll be your Recipe Rabbit for today!\n\n".cyan
     display_image
     loop do
       main_menu
@@ -265,11 +265,11 @@ def run
 
       when "4", "exit" then
         system("clear")
-        puts "\n Catch you later, doc!\n\n"
+        puts "\n Catch you later, doc!\n\n".light_red
         break
 
       else
-        puts "Invalid command. Please try again."
+        puts "Invalid command. Please try again.".magenta
       end
     end
   end

@@ -4,7 +4,7 @@ TemplateRecipe.create(
   avg_cooking_time: 60,
   ingredient_requirement: "{
     \"grains\":0,
-    \"proteins\":0,
+    \"proteins\":1,
     \"veg\":3,
     \"base_ingredients\":[
       \"Oil\",

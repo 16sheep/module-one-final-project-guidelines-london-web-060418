@@ -99,7 +99,7 @@ class Recipe < ActiveRecord::Base
     x = self.ingredients.find do |ingredient|
       ingredient.category == ing_cat
     end
-    " #{x.name.downcase} "
+    " #{x.name.downcase} " if x != nil
   end
 
   def instructions
